@@ -66,13 +66,15 @@ class TBGFlowNet(TrajectoryBasedGFlowNet):
         )
 
         # If the conditioning values exist, we pass them to self.logZ
-        # (should be a ScalarEstimator or equivilant).
+        # (should be a ScalarEstimator or equivalant).
         if trajectories.conditioning is not None:
             with is_callable_exception_handler("logZ", self.logZ):
+                assert isinstance(self.logZ, ScalarEstimator)
                 logZ = self.logZ(trajectories.conditioning)
         else:
             logZ = self.logZ
 
+        assert isinstance(logZ, torch.Tensor)
         loss = (scores + logZ.squeeze()).pow(2).mean()
         if torch.isnan(loss):
             raise ValueError("loss is nan")
