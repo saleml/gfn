@@ -1,3 +1,4 @@
+from .bitSequence import BitSequence, BitSequencePlus
 from .box import Box
 from .discrete_ebm import DiscreteEBM
 from .hypergrid import HyperGrid
@@ -8,4 +9,6 @@ __all__ = [
     "DiscreteEBM",
     "HyperGrid",
     "Line",
+    "BitSequence",
+    "BitSequencePlus",
 ]
